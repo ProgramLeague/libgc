@@ -1,0 +1,19 @@
+CMAKE_MINIMUM_REQUIRED (VERSION 2.6)
+
+PROJECT(LGC)
+
+SET(CMAKE_INSTALL_PREFIX /usr/local)
+
+SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -g -O2 -Wall")
+
+INCLUDE_DIRECTORIES(${LGC_SOURCE_DIR}/include ${LGC_SOURCE_DIR}/src)
+
+SET(LGC_SRC src/lgc.c src/lgc_mem.c)
+
+ADD_LIBRARY(lgc SHARED ${LGC_SRC})
+
+INSTALL(TARGETS lgc LIBRARY DESTINATION lib)
+
+INSTALL(FILES ${LGC_SOURCE_DIR}/include/lgc.h
+              ${LGC_SOURCE_DIR}/include/lgc_mem.h
+        DESTINATION include)
