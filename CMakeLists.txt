@@ -8,7 +8,7 @@ SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -g -O2 -Wall")
 
 INCLUDE_DIRECTORIES(${LGC_SOURCE_DIR}/include ${LGC_SOURCE_DIR}/src)
 
-SET(LGC_SRC src/lgc.c src/lgc_mem.c)
+SET(LGC_SRC src/lgc.c src/lgc_mem.c src/lgc_pool.c)
 
 ADD_LIBRARY(lgc SHARED ${LGC_SRC})
 

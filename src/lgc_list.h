@@ -54,6 +54,26 @@ void lgc_list_push_back(lgc_list_head_t* head, lgc_list_t* obj)
 }
 
 static inline
+void lgc_list_push_front(lgc_list_head_t* head, lgc_list_t* obj)
+{
+	head->next->prev = obj;
+	obj->next = head->next;
+	head->next = obj;
+	obj->prev = (lgc_list_t*) head;
+	++ head->size;
+}
+
+static inline
+lgc_list_t* lgc_list_front(lgc_list_head_t* head)
+{
+	if (head->next == (lgc_list_t*)head) {
+		return NULL;
+	} else {
+		return head->next;
+	}
+}
+
+static inline
 void lgc_list_erase(lgc_list_head_t* head, lgc_list_t* obj)
 {
 	obj->prev->next = obj->next;
