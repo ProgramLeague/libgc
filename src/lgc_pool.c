@@ -180,12 +180,14 @@ static void move_if_empty(lgc_list_t* obj, void* data)
 	}
 }
 
-void lgc_pool_reorganize(lgc_pool_t* pool)
+void lgc_pool_reorganize(lgc_pool_t* pool, int deep)
 {
 	lgc_page_args_t args1 = {pool->used_page, pool->full_page};
 	lgc_list_foreach(pool->full_page, move_if_not_full, &args1);
 
-	lgc_page_args_t args2 = {pool->empty_page, pool->used_page};
-	lgc_list_foreach(pool->used_page, move_if_empty, &args2);
+	if (deep) {
+		lgc_page_args_t args2 = {pool->empty_page, pool->used_page};
+		lgc_list_foreach(pool->used_page, move_if_empty, &args2);
+	}
 }
 
